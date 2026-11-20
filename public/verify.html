@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Doğrulama</title>
+<style>
+  body{font-family:system-ui;background:#0f1115;color:#eee;display:grid;place-items:center;height:100vh;margin:0}
+  .box{width:280px;text-align:center}
+  input{width:100%;box-sizing:border-box;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #333;background:#1a1d24;color:#fff;font-size:16px}
+  button{width:100%;padding:10px;border:0;border-radius:8px;background:#4f7cff;color:#fff;font-size:16px;cursor:pointer}
+  .err{color:#ff6b6b;min-height:20px}
+</style>
+</head>
+<body>
+<div class="box">
+  <h3>Bot değilsin, değil mi?</h3>
+  <div id="q">Yükleniyor...</div>
+  <input id="a" type="number" inputmode="numeric" placeholder="Cevap">
+  <button id="btn">Doğrula</button>
+  <div class="err" id="err"></div>
+</div>
+<script>
+  const webKey = new URLSearchParams(location.search).get('webKey');
+  let challenge = null;
+
+  async function load() {
+    document.getElementById('err').textContent = '';
+    const r = await fetch(`/api/verify/start?webKey=${encodeURIComponent(webKey)}`);
+    const j = await r.json();
+    if (!r.ok) { document.getElementById('err').textContent = j.error; return; }
+    challenge = j.challenge;
+    document.getElementById('q').textContent = j.question;
+  }
+
+  document.getElementById('btn').onclick = async () => {
+    const answer = document.getElementById('a').value;
+    const r = await fetch('/api/verify/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ challenge, answer }),
+    });
+    const j = await r.json();
+    if (!r.ok) {
+      document.getElementById('err').textContent = j.error;
+      if (r.status === 400) load();
+      return;
+    }
+    parent.postMessage({ type: 'botverify:pass', pass: j.pass }, '*');
+  };
+
+  load();
+</script>
+</body>
+</html>
