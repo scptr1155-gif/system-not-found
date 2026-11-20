@@ -4,6 +4,7 @@ import { verifyToken, safeEq } from '../lib/token.js';
 import { cfg } from '../lib/config.js';
 
 export default async function handler(req, res) {
+  if (req.method !== 'POST')
   if (req.method !== 'POST') return res.status(405).json({ success: false });
 
   const { secretKey, pass } = req.body || {};
