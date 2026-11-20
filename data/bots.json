@@ -8,6 +8,15 @@
       "secretHash": "76506647a0bcf2ff9df55f056c885aefc33dcd739872ba897734d72425a9dd7b",
       "active": true,
       "createdAt": 1795191091120
+    },
+    "4276951a-dddb-43a9-8848-aee679e9c6f7": {
+      "botId": "4276951a-dddb-43a9-8848-aee679e9c6f7",
+      "name": "scp",
+      "domain": "scpscp.com",
+      "webKey": "wk_ps6plZY0lFR67V7zIltsKA",
+      "secretHash": "fc1af4af3e1f3b76be2672a6e81796d8bc8e9ca1aeeeacf8f240bb7ceb8d46b8",
+      "active": true,
+      "createdAt": 1795191093081
     }
   }
 }
