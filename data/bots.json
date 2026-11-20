@@ -1,0 +1,13 @@
+{
+  "bots": {
+    "05755b10-f2d8-4bf1-ba04-08ac5c146d3d": {
+      "botId": "05755b10-f2d8-4bf1-ba04-08ac5c146d3d",
+      "name": "scp",
+      "domain": "scpscp.com",
+      "webKey": "wk_mAg7pqGKQYaFwOHDzcCadw",
+      "secretHash": "76506647a0bcf2ff9df55f056c885aefc33dcd739872ba897734d72425a9dd7b",
+      "active": true,
+      "createdAt": 1795191091120
+    }
+  }
+}
